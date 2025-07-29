@@ -29,8 +29,14 @@ def fill_nans(df):
 
 def fix_negative_days(df):
     df['Days Between'] = (df['Book Returned'] - df['Book checkout']).dt.days
-    df.loc[df['Days Between'] < 0, 'Book Returned'] = df.loc[df['Days Between'] < 0, 'Book checkout']
+
+    mask = (df['Days Between'] < 0) & df['Book checkout'].notna() & df['Book Returned'].notna()
+    df.loc[mask, 'Book Returned'] = df.loc[mask, 'Book checkout']
+
     df['Days Between'] = (df['Book Returned'] - df['Book checkout']).dt.days
+
+    df['Days Between'] = df['Days Between'].fillna(-1)
+
     return df
 
 def process_csv(file_path):
