@@ -51,7 +51,7 @@ def write_to_sql(df, table_name, server, database, username, password, if_exists
 if __name__ == "__main__":
     # Ensure 'df' is your cleaned DataFrame variable
     write_to_sql(
-        df=df,
+        df=cleaned_df,
         table_name='LibraryUsers',
         server='localhost',
         database='LibraryDB',
