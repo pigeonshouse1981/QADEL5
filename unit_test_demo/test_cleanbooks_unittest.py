@@ -28,6 +28,13 @@ class TestCleanBooks(unittest.TestCase):
         self.assertFalse(df['Days Between'].isna().any(), "Some Days Between values are NaN")
         self.assertTrue((df['Days Between'] >= 0).all(), "Some Days Between values are negative")   
 
+    def test_parse_dates(self):
+        df = process_csv(self.file_path)
+        df = clean_quotes(df, 'Book checkout')
+        df = parse_dates(df, ['Book checkout', 'Book Returned'])
+        self.assertTrue(pd.api.types.is_datetime64_any_dtype(df['Book checkout']))
+        self.assertTrue(pd.api.types.is_datetime64_any_dtype(df['Book Returned']))
+
     
 
 
