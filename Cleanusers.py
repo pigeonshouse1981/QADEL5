@@ -18,7 +18,7 @@ def process_csv(file_path):
     **{col: 'Unknown' for col in df.select_dtypes(include=['object', 'string']).columns},
     **{col: pd.NaT for col in df.select_dtypes(include='datetime').columns}
     }, inplace=True)
-    # Remove quotation marks from 'book_checkout' column if it exists
+
 
 
     return df
@@ -27,7 +27,7 @@ def process_csv(file_path):
 if __name__ == "__main__":
     file_path = r"C:\Users\Admin\Desktop\QADEL5\data\03_Library SystemCustomers.csv"
     cleaned_df = process_csv(file_path)
-    print(cleaned_df)  # Show first few rows of cleaned data
+    print(cleaned_df)  
 
 
 
@@ -49,7 +49,6 @@ def write_to_sql(df, table_name, server, database, username, password, if_exists
     print(f"Data written to {table_name} table in {database} on {server}")
 
 if __name__ == "__main__":
-    # Ensure 'df' is your cleaned DataFrame variable
     write_to_sql(
         df=cleaned_df,
         table_name='LibraryUsers',
