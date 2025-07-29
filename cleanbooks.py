@@ -46,8 +46,7 @@ def write_to_sql(df, table_name, server, database, username, password, if_exists
         f"SERVER={server};"
         f"DATABASE={database};"
         f"UID={username};"
-        f"PWD={password}"
-        f"Trusted Connection=yes;"
+        f"PWD={password};"
     )
 
     connection_uri = "mssql+pyodbc:///?odbc_connect=" + urllib.parse.quote_plus(connection_string)
@@ -56,7 +55,19 @@ def write_to_sql(df, table_name, server, database, username, password, if_exists
     df.to_sql(table_name, engine, if_exists=if_exists, index=False)
     print(f"Data written to {table_name} table in {database} on {server}")
 
+
 if __name__ == "__main__":
     file_path = r"C:\Users\Admin\Desktop\QADEL5\data\03_Library Systembook.csv"
     cleaned_df = process_csv(file_path)
     print(cleaned_df) 
+
+if __name__ == "__main__":
+    write_to_sql(
+            df=cleaned_df,
+            table_name='LibraryBooks',
+            server='localhost',
+            database='LibraryDB',
+            username='me',
+            password='Password',
+            if_exists='replace'
+        )
