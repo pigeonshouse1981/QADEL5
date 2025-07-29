@@ -41,6 +41,9 @@ def process_csv(file_path):
     return df
 
 def write_to_sql(df, table_name, server, database, username, password, if_exists='replace'):
+    import urllib
+    from sqlalchemy import create_engine
+
     connection_string = (
         f"DRIVER={{ODBC Driver 17 for SQL Server}};"
         f"SERVER={server};"
@@ -54,6 +57,7 @@ def write_to_sql(df, table_name, server, database, username, password, if_exists
 
     df.to_sql(table_name, engine, if_exists=if_exists, index=False)
     print(f"Data written to {table_name} table in {database} on {server}")
+
 
 
 if __name__ == "__main__":
