@@ -32,10 +32,8 @@ def fix_negative_days(df):
 
     mask = (df['Days Between'] < 0) & df['Book checkout'].notna() & df['Book Returned'].notna()
     df.loc[mask, 'Book Returned'] = df.loc[mask, 'Book checkout']
-
     df['Days Between'] = (df['Book Returned'] - df['Book checkout']).dt.days
-
-    df['Days Between'] = df['Days Between'].fillna(-1)
+    df['Days Between'] = df['Days Between'].fillna(0)
 
     return df
 
