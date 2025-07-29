@@ -15,6 +15,9 @@ class Calculator:
     def get_quotient(self):
         return self.a / self.b
 
+    def get_root(self):
+        return self.a / self.b
+
 myCalc = Calculator(a = 2, b = 5)
 
 answer = myCalc.get_sum()
