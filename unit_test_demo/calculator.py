@@ -8,13 +8,13 @@ class Calculator:
 
 
     def get_difference(self):
-    return self.a - self.b
+        return self.a - self.b
 
     def get_product(self):
-    return self.a * self.b
+        return self.a * self.b
 
     def get_quotient(self):
-    return self.a / self.b
+        return self.a / self.b
 
 myCalc = Calculator(a = 2, b = 5)
 
