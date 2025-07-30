@@ -49,11 +49,18 @@
 <body>
     <div class="container">
         <h2>Enter Two Numbers</h2>
-        <form action="/sum" method="post">
-            <input type="text" name="num1" placeholder="First number" required>
-            <input type="text" name="num2" placeholder="Second number" required>
-            <button type="submit">Calculate</button>
-        </form>
-    </div>
+<form action="/calculate" method="post">
+    <input type="text" name="num1" placeholder="First number" required>
+    
+    <select name="operator" required>
+        <option value="+">+</option>
+        <option value="-">−</option>
+        <option value="*">×</option>
+        <option value="/">÷</option>
+    </select>
+    
+    <input type="text" name="num2" placeholder="Second number" required>
+    <button type="submit">Calculate</button>
+</form>
 </body>
 </html>
