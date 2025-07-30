@@ -6,6 +6,7 @@ WORKDIR /app
 # Copy files into the container
 COPY calculator.py .
 COPY main.py .
+COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
