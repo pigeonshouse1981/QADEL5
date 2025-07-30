@@ -20,7 +20,7 @@
             text-align: center;
             width: 300px;
         }
-        input[type="text"] {
+        input[type="text"], select {
             width: 100%;
             padding: 0.5rem;
             margin: 1rem 0;
@@ -49,18 +49,17 @@
 <body>
     <div class="container">
         <h2>Enter Two Numbers</h2>
-<form action="/calculate" method="post">
-    <input type="text" name="num1" placeholder="First number" required>
-    
-    <select name="operator" required>
-        <option value="+">+</option>
-        <option value="-">−</option>
-        <option value="*">×</option>
-        <option value="/">÷</option>
-    </select>
-    
-    <input type="text" name="num2" placeholder="Second number" required>
-    <button type="submit">Calculate</button>
-</form>
+        <form action="/calculate" method="post">
+            <input type="text" name="num1" placeholder="First number" required>
+            <select name="operator" required>
+                <option value="+">+</option>
+                <option value="-">−</option>
+                <option value="*">×</option>
+                <option value="/">÷</option>
+            </select>
+            <input type="text" name="num2" placeholder="Second number" required>
+            <button type="submit">Calculate</button>
+        </form>
+    </div>
 </body>
 </html>
