@@ -25,7 +25,7 @@ def process_csv(file_path):
 
 
 if __name__ == "__main__":
-    file_path = r"C:\Users\Admin\Desktop\QADEL5\data\03_Library SystemCustomers.csv"
+    file_path = r".\data\03_Library SystemCustomers.csv"
     cleaned_df = process_csv(file_path)
     print(cleaned_df)  
 
