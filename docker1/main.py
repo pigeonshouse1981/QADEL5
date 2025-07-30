@@ -1,6 +1,6 @@
 from calculator import Calculator
 
-myCalc = Calculator(a=934, b=34)
+calc = Calculator(a=1, b=1)
 
-# Output the product
-print(myCalc.get_product())
+# Print the 3 times table
+calc.times_table(multiplier=3)

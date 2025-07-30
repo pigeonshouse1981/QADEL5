@@ -18,7 +18,13 @@ class Calculator:
     def get_root(self):
         return self.a / self.b
 
-myCalc = Calculator(a = 2, b = 5)
+    def times_table(self, multiplier, up_to=1048576):
+        data = {
+            "N": list(range(1, up_to + 1)),
+            f"{multiplier} x N": [multiplier * i for i in range(1, up_to + 1)]
+        }
+        df = pd.DataFrame(data)
+        print(df)
 
-answer = myCalc.get_sum()
-print (answer)
+#answer = myCalc.get_sum()
+#print (answer)
