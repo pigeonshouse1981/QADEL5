@@ -7,4 +7,4 @@ WORKDIR /app
 COPY . /app
 
 # On starting, what should the container do ...
-ENTRYPOINT ["python","demo[_leve11.py"]
+ENTRYPOINT ["python", "demo_leve11.py"]
