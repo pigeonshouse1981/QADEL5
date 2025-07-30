@@ -2,7 +2,7 @@ FROM python
 
 WORKDIR /app
 
-# Copy all files into the container
+
 COPY . .
 
 # Install required packages
