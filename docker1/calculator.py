@@ -1,3 +1,6 @@
+
+import pandas as pd
+
 class Calculator:
     def __init__(self, a, b):
         self.a = a
