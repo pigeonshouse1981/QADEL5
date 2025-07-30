@@ -1,6 +1,8 @@
 import pandas as pd
 from sqlalchemy import create_engine
 import urllib
+import os
+
 
 def load_csv(file_path, dtype_map):
     return pd.read_csv(file_path, dtype=dtype_map, dayfirst=True)
@@ -69,7 +71,7 @@ def write_to_sql(df, table_name, server, database, username, password, if_exists
     print(f"Data written to {table_name} table in {database} on {server}")
 
 if __name__ == "__main__":
-    file_path = r".\data\03_Library Systembook.csv"
+    file_path = os.path.join("data", "03_Library Systembook.csv")
     cleaned_df = process_csv(file_path)
     print(cleaned_df)
 
