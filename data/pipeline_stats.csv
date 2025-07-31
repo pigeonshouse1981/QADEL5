@@ -1,4 +1,9 @@
-Run Count,Time Run,Original Row Count,Cleaned Row Count,Dates Within > ±1 1 Year,Nulls in Original,Nulls in Cleaned,Nulls Removed
-1,2025-07-31 10:02:33,114,21,114,560,1,559
-2,2025-07-31 10:02:37,114,21,114,560,1,559
-3,2025-07-31 10:02:38,114,21,114,560,1,559
+Run Count,Time Run,Original Row Count,Cleaned Row Count,Date IQR 1 Count,Date IQR 4 Count,Date Outliers (IQR),Nulls in Original,Nulls in Cleaned,Nulls Removed
+1,2025-07-31 11:15:31,114,21,,,0,560,1,559
+2,2025-07-31 11:15:34,114,21,,,0,560,1,559
+3,2025-07-31 11:15:36,114,21,,,0,560,1,559
+4,2025-07-31 11:15:38,114,21,,,0,560,1,559
+5,2025-07-31 11:15:39,114,21,,,0,560,1,559
+6,2025-07-31 11:15:41,114,21,,,0,560,1,559
+7,2025-07-31 11:21:44,114,21,,,0,560,1,559
+8,2025-07-31 11:21:45,114,21,,,0,560,1,559

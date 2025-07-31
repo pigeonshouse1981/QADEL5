@@ -42,8 +42,13 @@ def calculate_pipeline_stats(df_original, df_cleaned, file_path):
     one_year_window = (now - timedelta(days=365), now + timedelta(days=365))
 
     parsed_dates = pd.to_datetime(df_original['Book checkout'], errors='coerce')
-    date_mask = ~parsed_dates.between(one_year_window[0], one_year_window[1])
-
+    date_timestamps = (parsed_dates.dropna() - pd.Timestamp("1970-01-01")) // pd.Timedelta(days=1)
+    Q1 = date_timestamps.quantile(0.25)
+    Q3 = date_timestamps.quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    outlier_count = ((date_timestamps < lower_bound) | (date_timestamps > upper_bound)).sum()
     nulls_before = df_original.isnull().sum().sum()
     nulls_after = df_cleaned.isnull().sum().sum()
     nulls_removed = nulls_before - nulls_after
@@ -63,7 +68,9 @@ def calculate_pipeline_stats(df_original, df_cleaned, file_path):
         'Time Run': now.strftime("%Y-%m-%d %H:%M:%S"),
         'Original Row Count': len(df_original),
         'Cleaned Row Count': len(df_cleaned),
-        'Dates Within > ±1 1 Year': date_mask.sum(),
+        'Date IQR 1 Count': lower_bound,
+        'Date IQR 4 Count': upper_bound,
+        'Date Outliers (IQR)': outlier_count, 
         'Nulls in Original': nulls_before,
         'Nulls in Cleaned': nulls_after,
         'Nulls Removed': nulls_removed
