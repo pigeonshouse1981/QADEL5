@@ -30,12 +30,39 @@ def fill_nans(df):
     return df
 
 def fix_negative_days(df):
+    df['Book checkout'] = pd.to_datetime(df['Book checkout'], errors='coerce', dayfirst=True)
+    df['Book Returned'] = pd.to_datetime(df['Book Returned'], errors='coerce', dayfirst=True)
+
+    # Case 1: Book checkout is after Book Returned ➜ adjust Book checkout
+    mask_checkout_after_return = (
+        df['Book checkout'].notna() & 
+        df['Book Returned'].notna() & 
+        (df['Book checkout'] > df['Book Returned'])
+    )
+    df.loc[mask_checkout_after_return, 'Book checkout'] = (
+        df.loc[mask_checkout_after_return, 'Book Returned'] - pd.Timedelta(days=14)
+    )
+
+    # Case 2: Book checkout is NaT but Book Returned is valid ➜ infer checkout as 14 days before return
+    mask_checkout_missing = df['Book checkout'].isna() & df['Book Returned'].notna()
+    df.loc[mask_checkout_missing, 'Book checkout'] = (
+        df.loc[mask_checkout_missing, 'Book Returned'] - pd.Timedelta(days=14)
+    )
+
+    # Case 3: Book Returned is NaT but Book checkout is valid ➜ infer return as 14 days after checkout
+    mask_return_missing = df['Book Returned'].isna() & df['Book checkout'].notna()
+    df.loc[mask_return_missing, 'Book Returned'] = (
+        df.loc[mask_return_missing, 'Book checkout'] + pd.Timedelta(days=14)
+    )
+
+    # Final: Calculate or fix Days Between
     df['Days Between'] = (df['Book Returned'] - df['Book checkout']).dt.days
-    mask = (df['Days Between'] < 0) & df['Book checkout'].notna() & df['Book Returned'].notna()
-    df.loc[mask, 'Book Returned'] = df.loc[mask, 'Book checkout']
-    df['Days Between'] = (df['Book Returned'] - df['Book checkout']).dt.days
+
+    # If still null or negative (e.g., both dates were bad), set to 0
     df['Days Between'] = df['Days Between'].fillna(0)
+    df.loc[df['Days Between'] < 0, 'Days Between'] = 0
     return df
+
 
 def calculate_pipeline_stats(df_original, df_cleaned, file_path):
     now = datetime.now()
